@@ -1,0 +1,32 @@
+Mysql
+Есть несколько таблиц. 
+Таблица product, которая содержит id_product товара как первичный ключ (AI) и столбец id_category_default - категория по умолчанию.
+id_product   |   id_category_default
+____________________________________
+3521		 |   140
+3526		 |	 230
+
+Также есть таблица category, содержащая id_category как первичный ключ (AI) и столбец kind(varchar) - тип категории.
+
+id_category  | 	 kind
+____________________________________
+140			 |	 serie
+230			 |	 brand
+
+Таблица category_product, содержит связи между id_category и id_product. Не содержит первичного ключа.
+id_product   |   id_category
+_____________________________________
+3521         |   140
+3521         |   230
+3526         |   140
+3526         |   230
+Суть задачи - написать один запрос, который проставит в таблице product те айдишники категорий, у которых тип категории - serie.
+
+
+
+
+Update p set p.id_category_def=id_categ
+From product p
+Join category_product cp on p.id_product=cp.id_product
+Join category c on cp.id_cat = c.id_category
+Where c.kind= 'serie'
